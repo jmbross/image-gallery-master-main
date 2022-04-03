@@ -1,0 +1,9 @@
+.gallery{
+    height: 150px;
+    width: 150px;
+    margin: 2px;
+   
+}
+.modal-header{
+   display:block;
+}
