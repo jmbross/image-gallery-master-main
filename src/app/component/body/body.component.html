@@ -5,7 +5,7 @@
 
 </div>
 <div class="gallery" *ngFor="let Image of data">
-  <a href="#" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <a href="#" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="onbtnClick(Image)">
     <!-- Button trigger modal -->
     <img [src]="Image.thumbnailUrl" width="150" height="150">
   </a>
@@ -14,13 +14,13 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{Image.title}}</h5>
-          <h5 class="modal-url" id="exampleModalLabel">{{Image.url}}</h5>
+          <h5 class="modal-title" id="exampleModalLabel">{{title}}</h5>
+          <h5 class="modal-url" id="exampleModalLabel">{{url}}</h5>
         </div>
         <div class="modal-body">
           <div class="row my-auto">
             <a class="portfolio-link" href="#exampleModal" data-bs-toggle="modal">
-              <img id="size" [src]="Image.url" alt="">
+              <img id="size" [src]="url" alt="">
             </a>
           </div>
           <div class="modal-footer">

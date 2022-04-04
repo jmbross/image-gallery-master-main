@@ -16,7 +16,7 @@ export class BodyComponent implements OnInit {
   url: string = "";
   data: Image[] = [];
   modal: any;
-  
+
 
   @Output() btnClick = new EventEmitter();
 
@@ -28,8 +28,8 @@ export class BodyComponent implements OnInit {
       console.log(this.data)
     })
   }
-  onbtnClick() {
-    this.btnClick.emit();
-    this.modal.show();
+  onbtnClick(Image:any) {
+    this.title = (Image.title);
+    this.url = (Image.url);
   }
 }
