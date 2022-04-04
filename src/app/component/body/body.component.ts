@@ -17,8 +17,7 @@ export class BodyComponent implements OnInit {
   url: string = "";
   data: Image[] = [];
   modal: any;
-
-
+  cantVocales: number = 0;
 
   @Output() btnClick = new EventEmitter();
 
@@ -27,19 +26,17 @@ export class BodyComponent implements OnInit {
   ngOnInit(): void {
     this.imagesService.getImages().subscribe(data => {
       this.data = data;
-
-      console.log(this.data);
+      this.ordenamientoArray(data);
     })
   }
-  onbtnClick(Image:any) {
+  onbtnClick(Image: any) {
     this.title = (Image.title);
     this.url = (Image.url);
   }
-
-pepito(Image:any){
-  this.title = (Image.title)
-  console.log(this.title)
-}
-
-
+ 
+   ordenamientoArray(data: any){
+    for (let i = 0; i < data.length; i++) {
+     console.log(data.title)
+    }
+  }
 }
