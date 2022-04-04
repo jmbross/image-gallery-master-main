@@ -3,9 +3,8 @@
     Bienvenido a la Galería de Imágenes de KiuSystem
   </h1>
 
-</div>
 <div class="gallery" *ngFor="let Image of data">
-  <a href="#" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="onbtnClick(Image)">
+  <a href="#" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="onbtnClick(Image)" >
     <!-- Button trigger modal -->
     <img [src]="Image.thumbnailUrl" width="150" height="150">
   </a>

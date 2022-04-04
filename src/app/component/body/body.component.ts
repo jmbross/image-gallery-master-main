@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Data } from '@angular/router';
 import { Image } from 'src/app/Image';
 import { ImagesService } from 'src/app/service/images.service';
 
@@ -18,6 +19,7 @@ export class BodyComponent implements OnInit {
   modal: any;
 
 
+
   @Output() btnClick = new EventEmitter();
 
   constructor(private imagesService: ImagesService) { }
@@ -25,11 +27,19 @@ export class BodyComponent implements OnInit {
   ngOnInit(): void {
     this.imagesService.getImages().subscribe(data => {
       this.data = data;
-      console.log(this.data)
+
+      console.log(this.data);
     })
   }
   onbtnClick(Image:any) {
     this.title = (Image.title);
     this.url = (Image.url);
   }
+
+pepito(Image:any){
+  this.title = (Image.title)
+  console.log(this.title)
+}
+
+
 }
