@@ -17,7 +17,9 @@ export class BodyComponent implements OnInit {
   url: string = "";
   data: Image[] = [];
   modal: any;
-  cantVocales: number = 0;
+  
+  
+  
 
   @Output() btnClick = new EventEmitter();
 
@@ -26,6 +28,7 @@ export class BodyComponent implements OnInit {
   ngOnInit(): void {
     this.imagesService.getImages().subscribe(data => {
       this.data = data;
+      
       this.ordenamientoArray(data);
     })
   }
@@ -34,9 +37,25 @@ export class BodyComponent implements OnInit {
     this.url = (Image.url);
   }
  
-   ordenamientoArray(data: any){
+   ordenamientoArray(data: any[]){
+    
     for (let i = 0; i < data.length; i++) {
-     console.log(data.title)
-    }
-  }
+     const element = data[i];
+     const count = element.title.match(/[aeiou]/gi).length;
+     const cantVocales= {"vocales" : count};
+     
+     
+     
+     element.vocales = Object.assign(element.vocales, cantVocales);
+       //propiedad                         target          sourse
+     
+     
+     
+        //console.log(element.title)
+     //console.log (count);
+     //console.log (cantVocales);
+   }
+     
+ } 
+
 }
