@@ -17,9 +17,9 @@ export class BodyComponent implements OnInit {
   url: string = "";
   data: Image[] = [];
   modal: any;
-  
-  
-  
+
+
+
 
   @Output() btnClick = new EventEmitter();
 
@@ -28,7 +28,6 @@ export class BodyComponent implements OnInit {
   ngOnInit(): void {
     this.imagesService.getImages().subscribe(data => {
       this.data = data;
-      
       this.ordenamientoArray(data);
     })
   }
@@ -36,26 +35,32 @@ export class BodyComponent implements OnInit {
     this.title = (Image.title);
     this.url = (Image.url);
   }
- 
-   ordenamientoArray(data: any[]){
-    
+
+  ordenamientoArray(data: any[]) {
     for (let i = 0; i < data.length; i++) {
-     const element = data[i];
-     const count = element.title.match(/[aeiou]/gi).length;
-     const cantVocales= {"vocales" : count};
-     
-     
-     
-     element.vocales = Object.assign(element.vocales, cantVocales);
-       //propiedad                         target          sourse
-     
-     
-     //Hola
-        //console.log(element.title)
-     //console.log (count);
-     //console.log (cantVocales);
-   }
-     
- } 
+      const element = data[i];
+      const count = element.title.match(/[aeiou]/gi).length;
+      data[i].vocales = count;
+     }
+    data.sort(this.compare);
+    for (let de of data) {
+      console.log( de.vocales + " " + de.id );
+    }
+}
+  compare(a: any, b: any) {
+    if (a.vocales < b.vocales) {
+      return -1;
+    }
+    if (a.vocales > b.vocales) {
+      return 1;
+    }
+    if (a.id < b.id) {
+      return -1;
+    }
+    if (a.id > b.id) {
+      return 1;
+    }
+    return 0;
+  }
 
 }
