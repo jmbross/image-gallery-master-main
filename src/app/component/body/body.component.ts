@@ -6,34 +6,30 @@ import { ImagesService } from 'src/app/service/images.service';
 @Component({
   selector: 'app-body',
   templateUrl: './body.component.html',
-  styleUrls: ['./body.component.css']
+  styleUrls: ['./body.component.css'],
 })
 export class BodyComponent implements OnInit {
-
   id: number = 0;
-  title: string = "";
-  thumbnailUrl: string = "";
-  href: string = "";
-  url: string = "";
+  title: string = '';
+  thumbnailUrl: string = '';
+  href: string = '';
+  url: string = '';
   data: Image[] = [];
   modal: any;
 
-
-
-
   @Output() btnClick = new EventEmitter();
 
-  constructor(private imagesService: ImagesService) { }
+  constructor(private imagesService: ImagesService) {}
 
   ngOnInit(): void {
-    this.imagesService.getImages().subscribe(data => {
+    this.imagesService.getImages().subscribe((data) => {
       this.data = data;
       this.ordenamientoArray(data);
-    })
+    });
   }
   onbtnClick(Image: any) {
-    this.title = (Image.title);
-    this.url = (Image.url);
+    this.title = Image.title;
+    this.url = Image.url;
   }
 
   ordenamientoArray(data: any[]) {
@@ -41,12 +37,11 @@ export class BodyComponent implements OnInit {
       const element = data[i];
       const count = element.title.match(/[aeiou]/gi).length;
       data[i].vocales = count;
-     }
-    data.sort(this.compare);
-    for (let de of data) {
-      console.log( de.vocales + " " + de.id );
+      
     }
-}
+    data.sort(this.compare);
+    
+  }
   compare(a: any, b: any) {
     if (a.vocales < b.vocales) {
       return -1;
@@ -62,5 +57,4 @@ export class BodyComponent implements OnInit {
     }
     return 0;
   }
-
 }
