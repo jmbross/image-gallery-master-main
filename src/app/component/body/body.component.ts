@@ -60,13 +60,6 @@ export class BodyComponent implements OnInit {
     return 0;
   }
 
-  /*onDropped(event: CdkDragDrop<any>) {
-    console.log(event);
-    const anterior = event.previousIndex;
-    const actual = event.currentIndex;
-    moveItemInArray(this.data, anterior, actual);
-  }*/
-
   dropListReceiverElement?: HTMLElement;
   dragDropInfo?: {
     dragIndex: number;
