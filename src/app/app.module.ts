@@ -2,21 +2,25 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from "@angular/common/http";
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './app.component';  
 import { FormsModule } from '@angular/forms';
 import { BodyComponent } from './component/body/body.component';
-import { ListComponent } from './component/list/list.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    BodyComponent,
-    ListComponent
+    BodyComponent
+ 
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ScrollingModule,
+    DragDropModule
 
   ],
   providers: [],

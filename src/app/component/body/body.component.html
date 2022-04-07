@@ -2,36 +2,43 @@
   <h1>
     Bienvenido a la Galería de Imágenes de KiuSystem
   </h1>
-
-<div class="gallery" *ngFor="let Image of data">
-  <a href="#" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="onbtnClick(Image)" >
-    <!-- Button trigger modal -->
-    <img [src]="Image.thumbnailUrl" width="150" height="150">
-  </a>
-
-<!--DND-->
+</div>
 
 
-  <!-- Modal -->
-  <div class="modal fade div-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{title}}</h5>
-          <h5 class="modal-url" id="exampleModalLabel">{{url}}</h5>
+  <div #dropListContainer class="example-container" cdkDropListGroup>
+    <div class="gallery" *ngFor="let Image of data; let i = index" cdkDropList [cdkDropListData]="i">
+      <a class="list-goup-item" href="#" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        (click)="onbtnClick(Image)"
+        cdkDrag [cdkDragData]="i"
+        (cdkDragEntered)="dragEntered($event)"
+        (cdkDragMoved)="dragMoved($event)"
+        (cdkDragDropped)="dragDropped($event)"
+      >
+        <img [src]="Image.thumbnailUrl" width="150" height="150">
+      </a>
+    </div>
+  </div>
+  
+ 
+<!-- Modal -->
+<div class="modal fade div-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{title}}</h5>
+        <h5 class="modal-url" id="exampleModalLabel">{{url}}</h5>
+      </div>
+      <div class="modal-body">
+        <div class="row my-auto">
+          <a class="portfolio-link" href="#exampleModal" data-bs-toggle="modal">
+            <img id="size" [src]="url" alt="">
+          </a>
         </div>
-        <div class="modal-body">
-          <div class="row my-auto">
-            <a class="portfolio-link" href="#exampleModal" data-bs-toggle="modal">
-              <img id="size" [src]="url" alt="">
-            </a>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
-
 </div>

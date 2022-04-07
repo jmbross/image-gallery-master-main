@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Data } from '@angular/router';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Image } from 'src/app/Image';
 import { ImagesService } from 'src/app/service/images.service';
+import { CdkDragDrop, CdkDragEnter, CdkDragMove, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-body',
@@ -16,6 +16,8 @@ export class BodyComponent implements OnInit {
   url: string = '';
   data: Image[] = [];
   modal: any;
+
+  @ViewChild('dropListContainer') dropListContainer?: ElementRef;
 
   @Output() btnClick = new EventEmitter();
 
@@ -37,10 +39,10 @@ export class BodyComponent implements OnInit {
       const element = data[i];
       const count = element.title.match(/[aeiou]/gi).length;
       data[i].vocales = count;
-      
+
     }
     data.sort(this.compare);
-    
+
   }
   compare(a: any, b: any) {
     if (a.vocales < b.vocales) {
@@ -57,4 +59,69 @@ export class BodyComponent implements OnInit {
     }
     return 0;
   }
+
+  /*onDropped(event: CdkDragDrop<any>) {
+    console.log(event);
+    const anterior = event.previousIndex;
+    const actual = event.currentIndex;
+    moveItemInArray(this.data, anterior, actual);
+  }*/
+
+  dropListReceiverElement?: HTMLElement;
+  dragDropInfo?: {
+    dragIndex: number;
+    dropIndex: number;
+  };
+
+  dragEntered(event: CdkDragEnter<number>) {
+    const drag = event.item;
+    const dropList = event.container;
+    const dragIndex = drag.data;
+    const dropIndex = dropList.data;
+
+    this.dragDropInfo = { dragIndex, dropIndex };
+
+    const phContainer = dropList.element.nativeElement;
+    const phElement = phContainer.querySelector('.cdk-drag-placeholder');
+
+    if (phElement) {
+      phContainer.removeChild(phElement);
+      phContainer.parentElement?.insertBefore(phElement, phContainer);
+
+      moveItemInArray(this.data, dragIndex, dropIndex);
+    }
+  }
+
+  dragMoved(event: CdkDragMove<number>) {
+    if (!this.dropListContainer || !this.dragDropInfo) return;
+
+    const placeholderElement =
+      this.dropListContainer.nativeElement.querySelector(
+        '.cdk-drag-placeholder'
+      );
+
+    const receiverElement =
+      this.dragDropInfo.dragIndex > this.dragDropInfo.dropIndex
+        ? placeholderElement?.nextElementSibling
+        : placeholderElement?.previousElementSibling;
+
+    if (!receiverElement) {
+      return;
+    }
+
+    receiverElement.style.display = 'none';
+    this.dropListReceiverElement = receiverElement;
+  }
+
+  dragDropped(event: CdkDragDrop<number>) {
+    if (!this.dropListReceiverElement) {
+      return;
+    }
+
+    this.dropListReceiverElement.style.removeProperty('display');
+    this.dropListReceiverElement = undefined;
+    this.dragDropInfo = undefined;
+  }
+
+
 }

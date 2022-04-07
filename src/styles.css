@@ -17,4 +17,8 @@ div.gallery {
    }
    #size{
     height:auto;
+    width: inherit;
+   }
+   .modal-header{
+       text-align: center;
    }

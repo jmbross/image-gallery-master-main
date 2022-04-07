@@ -22,4 +22,6 @@ export class ImagesService {
       return this.http.get<Image[]>(this.apiUrl);
     }
  
+  
+
 }
