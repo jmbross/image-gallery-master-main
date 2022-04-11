@@ -1,4 +1,4 @@
-<div style="text-align:center">
+<div style="text-align:center" class="p-3 mb-2 bg-primary text-white">
   <h1>
     Bienvenido a la Galería de Imágenes de KiuSystem
   </h1>
@@ -14,12 +14,12 @@
         (cdkDragMoved)="dragMoved($event)"
         (cdkDragDropped)="dragDropped($event)"
       >
-        <img [src]="Image.thumbnailUrl" width="150" height="150">
+        <img [src]="Image.thumbnailUrl" width="200" height="200" class="rounded" class="rounded-circle">
       </a>
     </div>
   </div>
-  
- 
+
+
 <!-- Modal -->
 <div class="modal fade div-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
   aria-hidden="true">

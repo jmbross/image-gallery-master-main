@@ -1,7 +1,19 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Image } from 'src/app/Image';
 import { ImagesService } from 'src/app/service/images.service';
-import { CdkDragDrop, CdkDragEnter, CdkDragMove, moveItemInArray } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  CdkDragEnter,
+  CdkDragMove,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-body',
@@ -39,10 +51,8 @@ export class BodyComponent implements OnInit {
       const element = data[i];
       const count = element.title.match(/[aeiou]/gi).length;
       data[i].vocales = count;
-
     }
     data.sort(this.compare);
-
   }
   compare(a: any, b: any) {
     if (a.vocales < b.vocales) {
@@ -115,6 +125,4 @@ export class BodyComponent implements OnInit {
     this.dropListReceiverElement = undefined;
     this.dragDropInfo = undefined;
   }
-
-
 }
